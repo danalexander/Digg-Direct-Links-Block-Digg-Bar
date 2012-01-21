@@ -1,11 +1,10 @@
 // ==UserScript==
-// @name           Digg Direct Links & Block Digg Bar v1.0
-// @namespace      dan@danalexander.org
+// @name           Digg Direct Links & Block Digg Bar
+// @namespace      http://danalexander.org
 // @description    Rewrites digg site links to point directly to the websites, to avoid the diggbar altogether. Forces the Top News to point directly to the article, instead of redirecting to comments section. Also removes the diggbar from any visited links.
-// @match        http://digg.com/*
+// @version        1.0.1
+// @match          http://digg.com/*
 // ==/UserScript==
-
-// @include        http://digg.com/*
 
 // REFERENCES:
 // - Use jQuery if it already exists on the page
