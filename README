@@ -1,0 +1,6 @@
+Digg Direct Links & Block Digg Bar
+
+Rewrites digg site links to point directly to the websites, to avoid the diggbar altogether. Forces the Top News to point directly to the article, instead of redirecting to comments section. Also removes the diggbar from any visited links.
+
+- Chrome: Drag onto Chrome to install
+- Firefox: Use Greasemonkey extension
