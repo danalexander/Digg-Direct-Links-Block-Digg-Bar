@@ -2,7 +2,7 @@
 // @name           Digg Direct Links & Block Digg Bar
 // @namespace      http://danalexander.org
 // @description    Rewrites digg site links to point directly to the websites, to avoid the diggbar altogether. Forces the Top News to point directly to the article, instead of redirecting to comments section. Also removes the diggbar from any visited links.
-// @version        1.0.1
+// @version        1.0.2
 // @match          http://digg.com/*
 // ==/UserScript==
 
@@ -30,21 +30,29 @@ if(top.location.hostname == "digg.com") {
 		// Digg site (ok to use jquery)
 		
 		// Create a wrapper function
-		var rewrite_links = function() {
+		var javascript_append = function() {
 			// Direct links for all story item (including right section)
 			
-			$(function() {
-				$('a:eq(0)', 'div.story-details, div.story-item-details').each(function(){
-					var ahref = $(this).attr('href').split("/");
-					$(this).attr('href',  "/story/r/" + ahref[ahref.length-1]);
+			function rewrite_links() {
+				$(function() {
+					$('a:eq(0)', 'div.story-details, .stories:visible div.story-item-details').each(function(){
+						var ahref = $(this).attr('href').split("/");
+						$(this).attr('href',  "/story/r/" + ahref[ahref.length-1]);
+					});
 				});
-			});
+			}
+			
+			// Call it initially
+			rewrite_links();
+			
+			// Also call it every time we hit PREV / NEXT page
+			$(document).ajaxComplete(function() { rewrite_links(); });
 		}		
 		
 		// Inject our main script
 		// REFERENCE: http://stackoverflow.com/questions/2246901/how-can-i-use-jquery-in-greasemonkey-scripts-in-google-chrome
 		var script = document.createElement('script');
-		script.textContent = '(' + rewrite_links.toString() + ')();';
+		script.textContent = '(' + javascript_append.toString() + ')();';
 		document.body.appendChild(script);
 	}
 }
